@@ -10,7 +10,6 @@ import logging
 
 from flask_github import GitHub
 from flask_limiter import Limiter
-from flask_limiter.util import get_remote_address
 from flask import Flask
 
 app = Flask(__name__, static_url_path='')
@@ -22,7 +21,7 @@ app.config.from_object('config')
 app.config['MAX_CONTENT_LENGTH'] = 5.5 * 1024 * 1024
 
 github = GitHub(app)
-limiter = Limiter(app, key_func=get_remote_address)
+limiter = Limiter(app)
 
 # import views after we initialize our github object
 import webcompat.views
